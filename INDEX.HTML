@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XKCD-Style What If Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .main-content {
+            flex: 2;
+            min-width: 300px;
+        }
+        .sidebar {
+            flex: 1;
+            min-width: 200px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .article-list {
+            list-style: none;
+            padding: 0;
+        }
+        .article-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+        .vote-buttons {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            .container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>XKCD-Style What If Generator</h1>
+    <div class="container">
+        <div class="main-content">
+            <h2>Create Your What If</h2>
+            <input type="text" id="apiKeyInput" placeholder="Enter your OpenAI API Key">
+            <input type="text" id="topicInput" placeholder="Enter your topic (short phrase)">
+            <button onclick="generateArticle()">Generate Article</button>
+            <div id="articleOutput"></div>
+        </div>
+        
+        <div class="sidebar">
+            <h3>Previous Articles</h3>
+            <ul class="article-list" id="articleList">
+                <!-- Previous articles will be populated here -->
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Created by [Your Name] | 
+        <a href="https://github.com/yourusername">GitHub</a> | 
+        <a href="https://buymeacoffee.com/yourusername">Buy Me a Coffee</a></p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+        // Sample previous articles
+        let articles = [
+            {id: 1, title: "What if gravity stopped?", votes: 5},
+            {id: 2, title: "What if cats could fly?", votes: 3}
+        ];
+
+        // Simple encryption for API key (Note: This is basic obfuscation, not true security)
+        function encryptApiKey(key) {
+            return CryptoJS.AES.encrypt(key, 'secret passphrase').toString();
+        }
+
+        function decryptApiKey(encryptedKey) {
+            const bytes = CryptoJS.AES.decrypt(encryptedKey, 'secret passphrase');
+            return bytes.toString(CryptoJS.enc.Utf8);
+        }
+
+        // Store encrypted API key in localStorage
+        function saveApiKey(key) {
+            const encrypted = encryptApiKey(key);
+            localStorage.setItem('encryptedApiKey', encrypted);
+        }
+
+        // Retrieve and decrypt API key
+        function getApiKey() {
+            const encrypted = localStorage.getItem('encryptedApiKey');
+            return encrypted ? decryptApiKey(encrypted) : null;
+        }
+
+        // Generate article
+        async function generateArticle() {
+            const topic = document.getElementById('topicInput').value;
+            let apiKey = document.getElementById('apiKeyInput').value || getApiKey();
+
+            if (!apiKey) {
+                alert('Please enter your OpenAI API key!');
+                return;
+            }
+            if (!topic) {
+                alert('Please enter a topic!');
+                return;
+            }
+
+            // Save API key if newly entered
+            if (document.getElementById('apiKeyInput').value) {
+                saveApiKey(apiKey);
+            }
+
+            document.getElementById('articleOutput').innerHTML = 'Generating...';
+
+            // Mock response targeting ~1000 tokens (750-1000 words)
+            const mockArticle = `
+                <h2>What If: ${topic}</h2>
+                <p>Let's explore the utterly preposterous notion of "${topic}". Imagine a world where this isn't just a passing thought but an actual thing that happens—like, all the time. Buckle up, because this is going to get weird, and I’m going to throw some questionable math and half-baked science at you, XKCD-style.</p>
+                
+                <p>First off, let’s establish a baseline. If "${topic}" were real, the immediate consequences would ripple out like a pebble dropped in a pond—if that pebble were the size of a Buick and the pond were, say, the Pacific Ocean. The physics alone would be a nightmare. For instance, let’s assume this involves some kind of energy shift—maybe it’s kinetic, maybe it’s thermal, maybe it’s just pure chaos energy (patent pending). If we crunch the numbers (and by “crunch” I mean “wildly guess”), we’re talking about an energy output roughly equivalent to 10^15 joules, or enough to power a small city for a day, or a really ambitious toaster for about a millennium.</p>
+                
+                <p>Now, picture the scene: you’re walking down the street, minding your own business, when suddenly "${topic}" kicks in. If this involves something massive—like, say, elephants suddenly gaining the ability to teleport—the air displacement alone would sound like a thousand whoopee cushions going off at once. People would scream, dogs would bark, and physicists would collectively lose their minds trying to update their textbooks. The equation here is simple: E = MC², where E is “Everyone panicking,” M is “Massive confusion,” and C is “Crying scientists squared.”</p>
+                
+                <p>But it’s not all doom and gloom! There’s a silver lining—or at least a mildly amusing one. Let’s say "${topic}" means something less catastrophic, like “what if everyone could instantly speak fluent Klingon?” Suddenly, your local coffee shop is full of people shouting “Qapla’!” at the barista, who’s just trying to figure out if that means “latte” or “please stop.” The global economy might actually benefit—Star Trek conventions would explode in popularity, and we’d all finally have a use for those Klingon dictionaries gathering dust since the ‘90s. The downside? Diplomacy might get tricky when world leaders start negotiating in a language designed for growling.</p>
+                
+                <p>Scaling up, if "${topic}" affects the planet—like “what if Earth had rings like Saturn?”—we’d need to consider tidal forces, atmospheric scattering, and the fact that every sunset would look like a cosmic Instagram filter. The rings would weigh something like 10^20 kilograms (a number I just made up but sounds plausible), shedding dust and ice into our atmosphere. Weather forecasts would include “chance of ringfall,” and poets would have a field day. Downside: satellites would hate it, and your GPS might start directing you into low-orbit traffic jams.</p>
+                
+                <p>Let’s not forget the human element. People adapt—or they don’t. If "${topic}" is something bizarre like “what if we all woke up with an extra thumb?” surgeons would be out of a job, but glove manufacturers would thrive. Evolution might kick into overdrive, or it might just shrug and say, “Eh, close enough.” Social media would explode with thumb-selfies, and anthropologists would argue over whether this counts as a new species. (Spoiler: it doesn’t, but try telling that to the guy who just opened a jar with one hand.)</p>
+                
+                <p>In conclusion, "${topic}" would turn our world upside down—or at least tilt it a few degrees off-axis. The science is shaky, the outcomes are absurd, and the only certainty is that someone, somewhere, would try to monetize it. So next time you ponder this what-if, just remember: reality is only one poorly calculated assumption away from becoming a comic strip punchline.</p>
+            `;
+
+            // For real OpenAI integration (commented out):
+            /*
+            const response = await fetch('https://api.openai.com/v1/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: 'text-davinci-003',
+                    prompt: `Write an XKCD-style What If article about: ${topic}. Target ~1000 tokens with humorous scientific explanations.`,
+                    max_tokens: 1000,
+                    temperature: 0.8
+                })
+            });
+            const data = await response.json();
+            document.getElementById('articleOutput').innerHTML = `<h2>What If: ${topic}</h2>${data.choices[0].text}`;
+            */
+
+            document.getElementById('articleOutput').innerHTML = mockArticle;
+            addToArticleList(topic);
+        }
+
+        // Update article list
+        function updateArticleList() {
+            articles.sort((a, b) => b.votes - a.votes);
+            const list = document.getElementById('articleList');
+            list.innerHTML = '';
+            articles.forEach(article => {
+                const li = document.createElement('li');
+                li.className = 'article-item';
+                li.innerHTML = `
+                    <div class="vote-buttons">
+                        <button onclick="vote(${article.id}, 1)">?</button>
+                        <span>${article.votes}</span>
+                        <button onclick="vote(${article.id}, -1)">?</button>
+                    </div>
+                    ${article.title}
+                `;
+                list.appendChild(li);
+            });
+        }
+
+        // Add new article
+        function addToArticleList(title) {
+            articles.push({
+                id: articles.length + 1,
+                title: title,
+                votes: 0
+            });
+            updateArticleList();
+        }
+
+        // Handle voting
+        function vote(id, value) {
+            const article = articles.find(a => a.id === id);
+            if (article) {
+                article.votes += value;
+                updateArticleList();
+            }
+        }
+
+        // Initial setup
+        updateArticleList();
+        if (getApiKey()) {
+            document.getElementById('apiKeyInput').placeholder = 'API Key saved (enter new to override)';
+        }
+    </script>
+</body>
+</html>
