@@ -63,7 +63,7 @@
         <div class="main-content">
             <h2>Create Your What If</h2>
             <input type="text" id="apiKeyInput" placeholder="Enter your OpenAI API Key">
-            <input type="text" id="topicInput" placeholder="Enter your topic (short phrase)">
+            <input type="text" id="topicInput" placeholder="Start with WHAT IF.. (short phrase)">
             <button onclick="generateArticle()">Generate Article</button>
             <div id="articleOutput"></div>
         </div>
@@ -78,8 +78,8 @@
 
     <div class="footer">
         <p>Created by [Your Name] | 
-        <a href="https://github.com/yourusername">GitHub</a> | 
-        <a href="https://buymeacoffee.com/yourusername">Buy Me a Coffee</a></p>
+        <a href="https://github.com/AB0x">GitHub</a> | 
+        <a href="https://buymeacoffee.com/fstoka">Buy Me a Coffee</a></p>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
@@ -136,19 +136,19 @@
             // Mock response targeting ~1000 tokens (750-1000 words)
             const mockArticle = `
                 <h2>What If: ${topic}</h2>
-                <p>Let's explore the utterly preposterous notion of "${topic}". Imagine a world where this isn't just a passing thought but an actual thing that happensólike, all the time. Buckle up, because this is going to get weird, and Iím going to throw some questionable math and half-baked science at you, XKCD-style.</p>
+                <p>Let's explore the utterly preposterous notion of "${topic}". Imagine a world where this isn't just a passing thought but an actual thing that happens‚Äîlike, all the time. Buckle up, because this is going to get weird, and I‚Äôm going to throw some questionable math and half-baked science at you, XKCD-style.</p>
                 
-                <p>First off, letís establish a baseline. If "${topic}" were real, the immediate consequences would ripple out like a pebble dropped in a pondóif that pebble were the size of a Buick and the pond were, say, the Pacific Ocean. The physics alone would be a nightmare. For instance, letís assume this involves some kind of energy shiftómaybe itís kinetic, maybe itís thermal, maybe itís just pure chaos energy (patent pending). If we crunch the numbers (and by ìcrunchî I mean ìwildly guessî), weíre talking about an energy output roughly equivalent to 10^15 joules, or enough to power a small city for a day, or a really ambitious toaster for about a millennium.</p>
+                <p>First off, let‚Äôs establish a baseline. If "${topic}" were real, the immediate consequences would ripple out like a pebble dropped in a pond‚Äîif that pebble were the size of a Buick and the pond were, say, the Pacific Ocean. The physics alone would be a nightmare. For instance, let‚Äôs assume this involves some kind of energy shift‚Äîmaybe it‚Äôs kinetic, maybe it‚Äôs thermal, maybe it‚Äôs just pure chaos energy (patent pending). If we crunch the numbers (and by ‚Äúcrunch‚Äù I mean ‚Äúwildly guess‚Äù), we‚Äôre talking about an energy output roughly equivalent to 10^15 joules, or enough to power a small city for a day, or a really ambitious toaster for about a millennium.</p>
                 
-                <p>Now, picture the scene: youíre walking down the street, minding your own business, when suddenly "${topic}" kicks in. If this involves something massiveólike, say, elephants suddenly gaining the ability to teleportóthe air displacement alone would sound like a thousand whoopee cushions going off at once. People would scream, dogs would bark, and physicists would collectively lose their minds trying to update their textbooks. The equation here is simple: E = MC≤, where E is ìEveryone panicking,î M is ìMassive confusion,î and C is ìCrying scientists squared.î</p>
+                <p>Now, picture the scene: you‚Äôre walking down the street, minding your own business, when suddenly "${topic}" kicks in. If this involves something massive‚Äîlike, say, elephants suddenly gaining the ability to teleport‚Äîthe air displacement alone would sound like a thousand whoopee cushions going off at once. People would scream, dogs would bark, and physicists would collectively lose their minds trying to update their textbooks. The equation here is simple: E = MC¬≤, where E is ‚ÄúEveryone panicking,‚Äù M is ‚ÄúMassive confusion,‚Äù and C is ‚ÄúCrying scientists squared.‚Äù</p>
                 
-                <p>But itís not all doom and gloom! Thereís a silver liningóor at least a mildly amusing one. Letís say "${topic}" means something less catastrophic, like ìwhat if everyone could instantly speak fluent Klingon?î Suddenly, your local coffee shop is full of people shouting ìQaplaí!î at the barista, whoís just trying to figure out if that means ìlatteî or ìplease stop.î The global economy might actually benefitóStar Trek conventions would explode in popularity, and weíd all finally have a use for those Klingon dictionaries gathering dust since the ë90s. The downside? Diplomacy might get tricky when world leaders start negotiating in a language designed for growling.</p>
+                <p>But it‚Äôs not all doom and gloom! There‚Äôs a silver lining‚Äîor at least a mildly amusing one. Let‚Äôs say "${topic}" means something less catastrophic, like ‚Äúwhat if everyone could instantly speak fluent Klingon?‚Äù Suddenly, your local coffee shop is full of people shouting ‚ÄúQapla‚Äô!‚Äù at the barista, who‚Äôs just trying to figure out if that means ‚Äúlatte‚Äù or ‚Äúplease stop.‚Äù The global economy might actually benefit‚ÄîStar Trek conventions would explode in popularity, and we‚Äôd all finally have a use for those Klingon dictionaries gathering dust since the ‚Äò90s. The downside? Diplomacy might get tricky when world leaders start negotiating in a language designed for growling.</p>
                 
-                <p>Scaling up, if "${topic}" affects the planetólike ìwhat if Earth had rings like Saturn?îóweíd need to consider tidal forces, atmospheric scattering, and the fact that every sunset would look like a cosmic Instagram filter. The rings would weigh something like 10^20 kilograms (a number I just made up but sounds plausible), shedding dust and ice into our atmosphere. Weather forecasts would include ìchance of ringfall,î and poets would have a field day. Downside: satellites would hate it, and your GPS might start directing you into low-orbit traffic jams.</p>
+                <p>Scaling up, if "${topic}" affects the planet‚Äîlike ‚Äúwhat if Earth had rings like Saturn?‚Äù‚Äîwe‚Äôd need to consider tidal forces, atmospheric scattering, and the fact that every sunset would look like a cosmic Instagram filter. The rings would weigh something like 10^20 kilograms (a number I just made up but sounds plausible), shedding dust and ice into our atmosphere. Weather forecasts would include ‚Äúchance of ringfall,‚Äù and poets would have a field day. Downside: satellites would hate it, and your GPS might start directing you into low-orbit traffic jams.</p>
                 
-                <p>Letís not forget the human element. People adaptóor they donít. If "${topic}" is something bizarre like ìwhat if we all woke up with an extra thumb?î surgeons would be out of a job, but glove manufacturers would thrive. Evolution might kick into overdrive, or it might just shrug and say, ìEh, close enough.î Social media would explode with thumb-selfies, and anthropologists would argue over whether this counts as a new species. (Spoiler: it doesnít, but try telling that to the guy who just opened a jar with one hand.)</p>
+                <p>Let‚Äôs not forget the human element. People adapt‚Äîor they don‚Äôt. If "${topic}" is something bizarre like ‚Äúwhat if we all woke up with an extra thumb?‚Äù surgeons would be out of a job, but glove manufacturers would thrive. Evolution might kick into overdrive, or it might just shrug and say, ‚ÄúEh, close enough.‚Äù Social media would explode with thumb-selfies, and anthropologists would argue over whether this counts as a new species. (Spoiler: it doesn‚Äôt, but try telling that to the guy who just opened a jar with one hand.)</p>
                 
-                <p>In conclusion, "${topic}" would turn our world upside downóor at least tilt it a few degrees off-axis. The science is shaky, the outcomes are absurd, and the only certainty is that someone, somewhere, would try to monetize it. So next time you ponder this what-if, just remember: reality is only one poorly calculated assumption away from becoming a comic strip punchline.</p>
+                <p>In conclusion, "${topic}" would turn our world upside down‚Äîor at least tilt it a few degrees off-axis. The science is shaky, the outcomes are absurd, and the only certainty is that someone, somewhere, would try to monetize it. So next time you ponder this what-if, just remember: reality is only one poorly calculated assumption away from becoming a comic strip punchline.</p>
             `;
 
             // For real OpenAI integration (commented out):
